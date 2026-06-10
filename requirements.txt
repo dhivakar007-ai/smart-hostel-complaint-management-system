@@ -1,0 +1,2 @@
+# List of all dependencies required for the project.
+# Example: Flask, MySQL-connector, etc.

@@ -1,0 +1,1 @@
+# Data model representing the Student entity with attributes and methods.

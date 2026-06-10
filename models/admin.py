@@ -1,0 +1,1 @@
+# Data model representing the Admin entity with attributes and methods.

@@ -1,0 +1,6 @@
+# Specifies files and directories to be ignored by Git.
+__pycache__/
+*.pyc
+instance/
+.env
+database/db.sqlite

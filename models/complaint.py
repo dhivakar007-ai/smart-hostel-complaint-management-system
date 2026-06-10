@@ -1,0 +1,1 @@
+# Data model representing the Complaint entity with attributes and methods.

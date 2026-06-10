@@ -1,0 +1,1 @@
+-- Contains SQL script to define the database schema for the project.

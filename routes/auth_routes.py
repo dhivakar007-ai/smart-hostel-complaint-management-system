@@ -1,0 +1,1 @@
+# Routes for handling authentication-related operations such as login, logout, registration.
