@@ -1,3 +1,4 @@
+![Smart Hostel Banner](assets/banner.png)
 # 🏠 Smart Hostel Complaint Management System
 
 <p align="center">
@@ -13,6 +14,25 @@
 </p>
 
 ---
+## 📑 Table of Contents
+
+- Project Overview
+- Project Highlights
+- Key Features
+- Technology Stack
+- Project Structure
+- System Architecture
+- Installation
+- Live Demo
+- Application Preview
+- Security Features
+- Future Enhancements
+- AI-Assisted Development
+- Contact
+- Acknowledgements
+- License
+
+---
 
 ## 📌 Project Overview
 
@@ -21,6 +41,16 @@ The **Smart Hostel Complaint Management System** is a web-based application desi
 The system allows students to submit complaints digitally, track complaint progress, and receive updates, while administrators can manage complaints efficiently through a centralized dashboard.
 
 The main objective of this project is to reduce manual complaint handling, improve communication between students and hostel management, and provide a transparent issue-resolution system.
+
+## 🎯 Project Highlights
+
+- Responsive web-based complaint management system
+- Separate Student and Administrator portals
+- Secure authentication and session management
+- Complaint lifecycle tracking
+- Clean and intuitive dashboard
+- Hosted online using Render
+- Developed using modern Python Flask architecture
 
 ---
 
@@ -59,22 +89,40 @@ The main objective of this project is to reduce manual complaint handling, impro
 
 ---
 
-# 🏗️ System Architecture
+## 📂 Project Structure
 
+```text
+smart-hostel-complaint-management-system/
+
+├── app.py
+├── requirements.txt
+├── database.db
+├── static/
+├── templates/
+├── docs/
+├── assets/
+├── README.md
+└── LICENSE
 ```
-Student
-   |
-   ↓
-Web Interface
-   |
-   ↓
-Flask Backend
-   |
-   ↓
-SQLite Database
-   |
-   ↓
-Admin Dashboard
+
+---
+
+## 🏗️ System Architecture
+
+```mermaid
+flowchart TD
+
+A[Student]
+
+A --> B[Web Interface]
+
+B --> C[Flask Backend]
+
+C --> D[(SQLite Database)]
+
+C --> E[Admin Dashboard]
+
+E --> D
 ```
 
 ---
@@ -127,47 +175,38 @@ http://127.0.0.1:5000
 
 ---
 
-# 🌐 Live Demo
+## 🌐 Live Demo
 
-The application is deployed using Render.
+The application is deployed on **Render** and is publicly accessible.
 
-🔗 Live Website:
+<p align="center">
 
-(Add your Render URL here)
+**Live Website:**  
+https://smart-hostel-complaint-management-system-evzo.onrender.com/
 
----
+## 📸 Application Preview
 
-# 🤖 AI Assistance Disclosure
+<p align="center">
+  <img src="docs/login.png" alt="Login Page" width="85%">
+</p>
 
-This project was developed with the support of Artificial Intelligence (AI) tools used as development assistants.
-
-AI tools were utilized for:
-
-* Understanding programming concepts
-* Debugging and troubleshooting errors
-* Improving code quality and structure
-* Suggesting UI/UX improvements
-* Assisting with documentation preparation
-
-The project architecture, feature decisions, integration, testing, and final implementation were reviewed and completed during the development process.
-
-AI was used as a productivity tool to improve development efficiency and learning, similar to using technical documentation and developer resources.
+<p align="center"><b>Login Page</b></p>
 
 ---
 
-# 📸 Screenshots
+<p align="center">
+  <img src="docs/student-dashboard.png" alt="Student Dashboard" width="85%">
+</p>
 
-(Add your project screenshots here)
+<p align="center"><b>Student Dashboard</b></p>
 
-Example:
+---
 
-```
-screenshots/
- ├── login.png
- ├── dashboard.png
- ├── complaint.png
-```
+<p align="center">
+  <img src="docs/admin-dashboard.png" alt="Admin Dashboard" width="85%">
+</p>
 
+<p align="center"><b>Admin Dashboard</b></p>
 ---
 
 # 🔒 Security Features
@@ -189,13 +228,31 @@ screenshots/
 
 ---
 
-# 👨‍💻 Developer
+## 🤖 AI-Assisted Development
 
-**Dhivakar**
+This project was developed using **AI-assisted software development practices**.
 
-Smart Hostel Complaint Management System
-Academic Project
+Artificial Intelligence tools were used as engineering assistants to:
 
+- Accelerate debugging and troubleshooting
+- Improve code readability and maintainability
+- Refine UI/UX design ideas
+- Assist with documentation
+- Explore implementation approaches and best practices
+
+All architectural decisions, feature integration, testing, deployment, and final validation were completed as part of the project development process.
+
+AI was used as a productivity aid, similar to consulting official documentation, technical references, and developer resources.
+
+---
+
+## 📬 Contact
+
+**Developer:** Dhivakar S
+
+GitHub: https://github.com/dhivakar007-ai
+
+For academic discussions or project-related queries, feel free to open an issue in this repository.
 ---
 
 # ⭐ Acknowledgements
@@ -206,6 +263,14 @@ Special thanks to:
 * Python Community
 * Open-source contributors
 * AI-assisted development tools for improving productivity and problem-solving efficiency
+
+---
+
+## 📄 License
+
+This project is developed for academic and educational purposes.
+
+© 2026 Dhivakar. All rights reserved.
 
 ---
 
