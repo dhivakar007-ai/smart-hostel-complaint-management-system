@@ -1,1 +1,50 @@
-<!-- HTML template to view and manage complaints -->
+{% extends "layout.html" %}
+
+{% block title %}Manage Complaints | Smart Hostel CMS{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Manage Complaints</h1>
+    <p>Review complaints and update their status.</p>
+</div>
+
+{% if complaints %}
+<section class="table-card">
+    <table>
+        <thead>
+            <tr>
+                <th>Student</th>
+                <th>Title</th>
+                <th>Status</th>
+                <th>Submitted</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for complaint in complaints %}
+            <tr>
+                <td>{{ complaint['student_name'] }}</td>
+                <td>{{ complaint['title'] }}</td>
+                <td>{{ complaint['status'] }}</td>
+                <td>{{ complaint['created_at'] }}</td>
+                <td>
+                    <form method="post" class="inline-form">
+                        <input type="hidden" name="complaint_id" value="{{ complaint['id'] }}">
+                        <select name="status">
+                            <option value="Pending" {% if complaint['status'] == 'Pending' %}selected{% endif %}>Pending</option>
+                            <option value="In Progress" {% if complaint['status'] == 'In Progress' %}selected{% endif %}>In Progress</option>
+                            <option value="Resolved" {% if complaint['status'] == 'Resolved' %}selected{% endif %}>Resolved</option>
+                        </select>
+                        <input type="text" name="admin_note" placeholder="Note" value="{{ complaint['admin_note'] or '' }}">
+                        <button type="submit">Update</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% else %}
+<p class="empty-state">No complaints found.</p>
+{% endif %}
+{% endblock %}

@@ -1,1 +1,29 @@
-<!-- HTML template for the Admin Dashboard page -->
+{% extends "layout.html" %}
+
+{% block title %}Admin Dashboard | Smart Hostel CMS{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Admin Dashboard</h1>
+    <p>Quick overview of hostel complaint operations.</p>
+</div>
+
+<div class="stats-grid">
+    <div class="stat-card">
+        <h3>Students</h3>
+        <p>{{ stats.students }}</p>
+    </div>
+    <div class="stat-card">
+        <h3>Total Complaints</h3>
+        <p>{{ stats.complaints }}</p>
+    </div>
+    <div class="stat-card">
+        <h3>Pending</h3>
+        <p>{{ stats.pending }}</p>
+    </div>
+    <div class="stat-card">
+        <h3>Resolved</h3>
+        <p>{{ stats.resolved }}</p>
+    </div>
+</div>
+{% endblock %}

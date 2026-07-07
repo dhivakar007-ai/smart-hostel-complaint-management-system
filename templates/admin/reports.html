@@ -1,1 +1,33 @@
-<!-- HTML template for generating reports -->
+{% extends "layout.html" %}
+
+{% block title %}Reports | Smart Hostel CMS{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Reports</h1>
+    <p>View complaint summaries by status.</p>
+</div>
+
+{% if summary %}
+<section class="table-card">
+    <table>
+        <thead>
+            <tr>
+                <th>Status</th>
+                <th>Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in summary %}
+            <tr>
+                <td>{{ row['status'] }}</td>
+                <td>{{ row['count'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% else %}
+<p class="empty-state">No report data is available yet.</p>
+{% endif %}
+{% endblock %}

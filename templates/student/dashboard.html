@@ -1,1 +1,47 @@
-<!-- HTML template for the Student Dashboard page -->
+{% extends "layout.html" %}
+
+{% block title %}Student Dashboard | Smart Hostel CMS{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Welcome, {{ name }}</h1>
+    <p>Monitor your complaint status and submit new issues.</p>
+</div>
+
+<div class="card-grid">
+    <a class="card" href="{{ url_for('student.submit_complaint') }}">
+        <h2>Submit Complaint</h2>
+        <p>Report an issue with your hostel, room, or facilities.</p>
+    </a>
+    <a class="card" href="{{ url_for('student.complaint_history') }}">
+        <h2>Complaint History</h2>
+        <p>View past complaints and their current status.</p>
+    </a>
+</div>
+
+{% if complaints %}
+<section class="table-card">
+    <h2>Latest Complaints</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Status</th>
+                <th>Submitted</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for complaint in complaints[:5] %}
+            <tr>
+                <td>{{ complaint['title'] }}</td>
+                <td>{{ complaint['status'] }}</td>
+                <td>{{ complaint['created_at'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% else %}
+<p class="empty-state">No complaints submitted yet. Submit your first complaint now.</p>
+{% endif %}
+{% endblock %}

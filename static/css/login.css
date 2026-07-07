@@ -1,1 +1,5 @@
-/* CSS styles specific to the login page */
+@import url('style.css');
+
+.auth-panel {
+    margin-top: 2rem;
+}

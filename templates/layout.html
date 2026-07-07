@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Smart Hostel CMS{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header class="site-header">
+        <div class="brand">
+            <a href="{{ url_for('auth.login') }}">Smart Hostel CMS</a>
+        </div>
+        <nav>
+            {% if session.get('user_id') %}
+                {% if session.get('role') == 'admin' %}
+                    <a href="{{ url_for('admin.dashboard') }}">Dashboard</a>
+                    <a href="{{ url_for('admin.complaints') }}">Complaints</a>
+                    <a href="{{ url_for('admin.manage_students') }}">Students</a>
+                    <a href="{{ url_for('admin.reports') }}">Reports</a>
+                {% else %}
+                    <a href="{{ url_for('student.dashboard') }}">Dashboard</a>
+                    <a href="{{ url_for('student.submit_complaint') }}">Submit Complaint</a>
+                    <a href="{{ url_for('student.complaint_history') }}">History</a>
+                    <a href="{{ url_for('student.profile') }}">Profile</a>
+                {% endif %}
+                <a href="{{ url_for('auth.logout') }}" class="logout">Logout</a>
+            {% endif %}
+        </nav>
+    </header>
+    <main class="content">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flashes">
+                    {% for category, message in messages %}
+                        <div class="flash flash-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </main>
+    <footer class="site-footer">
+        <p>Smart Hostel Complaint Management System</p>
+    </footer>
+</body>
+</html>

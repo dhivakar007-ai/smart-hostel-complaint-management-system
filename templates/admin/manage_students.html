@@ -1,1 +1,69 @@
-<!-- HTML template to manage students -->
+{% extends "layout.html" %}
+
+{% block title %}Manage Students | Smart Hostel CMS{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Manage Students</h1>
+    <p>Create and manage student accounts from one place.</p>
+</div>
+
+<section class="form-card">
+    <h2>Add New Student</h2>
+    <form method="post">
+        <input type="hidden" name="add_student" value="1">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="room_number">Room Number</label>
+        <input type="text" id="room_number" name="room_number">
+
+        <button type="submit">Add Student</button>
+    </form>
+</section>
+
+{% if students %}
+<section class="table-card">
+    <h2>Student Accounts</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Room</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+            <tr>
+                <td>{{ student['name'] }}</td>
+                <td>{{ student['username'] }}</td>
+                <td>{{ student['email'] }}</td>
+                <td>{{ student['room_number'] }}</td>
+                <td>
+                    <form method="post" class="inline-form">
+                        <input type="hidden" name="delete_student" value="1">
+                        <input type="hidden" name="student_id" value="{{ student['id'] }}">
+                        <button type="submit" class="danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% else %}
+<p class="empty-state">No student accounts found.</p>
+{% endif %}
+{% endblock %}

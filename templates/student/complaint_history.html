@@ -1,1 +1,37 @@
-<!-- HTML template for the Complaint History page -->
+{% extends "layout.html" %}
+
+{% block title %}Complaint History | Smart Hostel CMS{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Complaint History</h1>
+    <p>Review the status of all your complaints.</p>
+</div>
+
+{% if complaints %}
+<section class="table-card">
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Status</th>
+                <th>Submitted</th>
+                <th>Last Updated</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for complaint in complaints %}
+            <tr>
+                <td>{{ complaint['title'] }}</td>
+                <td>{{ complaint['status'] }}</td>
+                <td>{{ complaint['created_at'] }}</td>
+                <td>{{ complaint['updated_at'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% else %}
+<p class="empty-state">You have not submitted any complaints yet.</p>
+{% endif %}
+{% endblock %}
