@@ -1,12 +1,8 @@
-DROP TABLE IF EXISTS students;
-DROP TABLE IF EXISTS complaints;
-DROP TABLE IF EXISTS admins;
-
 --------------------------------------------------
 -- Admin Table
 --------------------------------------------------
 
-CREATE TABLE admins (
+CREATE TABLE IF NOT EXISTS admins (
 
     id INTEGER PRIMARY KEY AUTOINCREMENT,
 
@@ -22,7 +18,7 @@ CREATE TABLE admins (
 -- Students
 --------------------------------------------------
 
-CREATE TABLE students (
+CREATE TABLE IF NOT EXISTS students (
 
     id INTEGER PRIMARY KEY AUTOINCREMENT,
 
@@ -46,7 +42,7 @@ CREATE TABLE students (
 -- Complaints
 --------------------------------------------------
 
-CREATE TABLE complaints (
+CREATE TABLE IF NOT EXISTS complaints (
 
     id INTEGER PRIMARY KEY AUTOINCREMENT,
 
@@ -69,27 +65,15 @@ CREATE TABLE complaints (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
     FOREIGN KEY(student_id)
-
     REFERENCES students(id)
 
 );
 
 --------------------------------------------------
--- Default Admin
+-- Default Admin (Only Once)
 --------------------------------------------------
 
-INSERT INTO admins (
-
-username,
-
-password
-
-)
-
-VALUES(
-
-'admin',
-
-'admin123'
-
-);
+INSERT OR IGNORE INTO admins
+(id, username, password)
+VALUES
+(1, 'admin', 'admin123');
