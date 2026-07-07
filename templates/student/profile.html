@@ -1,1 +1,266 @@
-<!-- HTML template for the Student Profile page -->
+{% extends "layout.html" %}
+
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="row">
+
+        <!-- Profile Card -->
+
+        <div class="col-lg-4 mb-4">
+
+            <div class="glass text-center p-5 rounded-4">
+
+                <img src="https://ui-avatars.com/api/?name={{ student.name if student else 'Student' }}&background=2563eb&color=fff&size=256"
+                     class="rounded-circle shadow mb-4"
+                     width="150"
+                     height="150">
+
+                <h3 class="fw-bold">
+
+                    {{ student.name if student else session.get('username') }}
+
+                </h3>
+
+                <p class="text-secondary">
+
+                    Hostel Student
+
+                </p>
+
+                <hr>
+
+                <div class="row text-center">
+
+                    <div class="col">
+
+                        <h4 class="fw-bold text-primary">
+
+                            {{ total_complaints|default(0) }}
+
+                        </h4>
+
+                        <small>
+
+                            Complaints
+
+                        </small>
+
+                    </div>
+
+                    <div class="col">
+
+                        <h4 class="fw-bold text-success">
+
+                            {{ resolved_count|default(0) }}
+
+                        </h4>
+
+                        <small>
+
+                            Resolved
+
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Details -->
+
+        <div class="col-lg-8">
+
+            <div class="glass p-5 rounded-4">
+
+                <h3 class="mb-4">
+
+                    <i class="fa-solid fa-user me-2"></i>
+
+                    Student Information
+
+                </h3>
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-4">
+
+                        <label class="text-secondary">
+
+                            Full Name
+
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            value="{{ student.name if student else '' }}"
+                            readonly>
+
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+
+                        <label class="text-secondary">
+
+                            Username
+
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            value="{{ student.username if student else session.get('username') }}"
+                            readonly>
+
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+
+                        <label class="text-secondary">
+
+                            Email
+
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            value="{{ student.email if student else '' }}"
+                            readonly>
+
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+
+                        <label class="text-secondary">
+
+                            Room Number
+
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            value="{{ student.room_number if student else '' }}"
+                            readonly>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="glass p-5 rounded-4 mt-4">
+
+                <h4 class="mb-4">
+
+                    Complaint Statistics
+
+                </h4>
+
+                <canvas id="profileChart"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+const ctx=document.getElementById("profileChart");
+
+if(ctx){
+
+new Chart(ctx,{
+
+type:"bar",
+
+data:{
+
+labels:["Pending","In Progress","Resolved"],
+
+datasets:[{
+
+label:"Complaints",
+
+data:[
+
+{{ pending_count|default(0) }},
+
+{{ progress_count|default(0) }},
+
+{{ resolved_count|default(0) }}
+
+],
+
+backgroundColor:[
+
+"#f59e0b",
+
+"#0ea5e9",
+
+"#10b981"
+
+],
+
+borderRadius:12
+
+}]
+
+},
+
+options:{
+
+responsive:true,
+
+plugins:{
+
+legend:{
+
+labels:{
+
+color:"white"
+
+}
+
+}
+
+},
+
+scales:{
+
+x:{
+
+ticks:{color:"white"}
+
+},
+
+y:{
+
+ticks:{color:"white"}
+
+}
+
+}
+
+}
+
+});
+
+}
+
+</script>
+
+{% endblock %}

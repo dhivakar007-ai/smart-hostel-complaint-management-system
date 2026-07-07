@@ -1,1 +1,275 @@
-<!-- HTML template for the Submit Complaint page -->
+{% extends "layout.html" %}
+
+{% block title %}Submit Complaint{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-10">
+
+            <div class="glass p-5 rounded-4">
+
+                <div class="text-center mb-5">
+
+                    <span class="badge bg-primary px-3 py-2 mb-3">
+
+                        Complaint Portal
+
+                    </span>
+
+                    <h2 class="fw-bold">
+
+                        Submit a New Complaint
+
+                    </h2>
+
+                    <p class="text-secondary">
+
+                        Fill in the required details. Your complaint will be forwarded to the hostel administration.
+
+                    </p>
+
+                </div>
+
+                <form method="POST" enctype="multipart/form-data">
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-4">
+
+                            <label class="form-label">
+
+                                Complaint Title
+
+                            </label>
+
+                            <input
+                                type="text"
+                                name="title"
+                                class="form-control"
+                                placeholder="Enter complaint title"
+                                required>
+
+                        </div>
+
+                        <div class="col-md-6 mb-4">
+
+                            <label class="form-label">
+
+                                Category
+
+                            </label>
+
+                            <select
+                                name="category"
+                                class="form-select">
+
+                                <option>Electrical</option>
+
+                                <option>Plumbing</option>
+
+                                <option>Cleaning</option>
+
+                                <option>Food</option>
+
+                                <option>WiFi</option>
+
+                                <option>Furniture</option>
+
+                                <option>Security</option>
+
+                                <option>Others</option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-4">
+
+                            <label class="form-label">
+
+                                Priority
+
+                            </label>
+
+                            <select
+                                name="priority"
+                                class="form-select">
+
+                                <option value="Low">
+
+                                    Low
+
+                                </option>
+
+                                <option value="Medium">
+
+                                    Medium
+
+                                </option>
+
+                                <option value="High">
+
+                                    High
+
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="col-md-6 mb-4">
+
+                            <label class="form-label">
+
+                                Hostel Block
+
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Block / Floor">
+
+                        </div>
+
+                    </div>
+
+                    <div class="mb-4">
+
+                        <label class="form-label">
+
+                            Complaint Description
+
+                        </label>
+
+                        <textarea
+                            name="description"
+                            rows="7"
+                            maxlength="500"
+                            class="form-control"
+                            id="description"
+                            placeholder="Describe your issue clearly..."
+                            required></textarea>
+
+                        <div class="text-end mt-2">
+
+                            <small id="counter">
+
+                                0 / 500 Characters
+
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                    <div class="mb-4">
+
+                        <label class="form-label">
+
+                            Upload Image (Optional)
+
+                        </label>
+
+                        <input
+                            type="file"
+                            name="image"
+                            class="form-control">
+
+                    </div>
+
+                    <div class="glass p-4 rounded-4 mb-4">
+
+                        <h5>
+
+                            Guidelines
+
+                        </h5>
+
+                        <ul>
+
+                            <li>
+
+                                Submit only genuine complaints.
+
+                            </li>
+
+                            <li>
+
+                                Avoid abusive language.
+
+                            </li>
+
+                            <li>
+
+                                Upload a photo if applicable.
+
+                            </li>
+
+                            <li>
+
+                                Choose the correct category.
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                    <div class="d-flex gap-3">
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary flex-fill">
+
+                            <i class="fa-solid fa-paper-plane me-2"></i>
+
+                            Submit Complaint
+
+                        </button>
+
+                        <button
+                            type="reset"
+                            class="btn btn-outline-light flex-fill">
+
+                            Reset
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const textarea=document.getElementById("description");
+
+const counter=document.getElementById("counter");
+
+textarea.addEventListener("input",()=>{
+
+counter.innerHTML=
+
+textarea.value.length+" / 500 Characters";
+
+});
+
+</script>
+
+{% endblock %}

@@ -1,1 +1,447 @@
-<!-- HTML template to manage students -->
+{% extends "layout.html" %}
+
+{% block title %}Manage Students{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid py-4">
+
+    <!-- Header -->
+
+    <div class="glass p-5 rounded-4 mb-4">
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-8">
+
+                <span class="badge bg-success mb-3">
+
+                    Student Management
+
+                </span>
+
+                <h2 class="fw-bold">
+
+                    Hostel Students
+
+                </h2>
+
+                <p class="text-secondary">
+
+                    Add, search and manage hostel students efficiently.
+
+                </p>
+
+            </div>
+
+            <div class="col-lg-4">
+
+                <div class="d-flex gap-2">
+
+                    <input
+                        type="text"
+                        id="studentSearch"
+                        class="form-control"
+                        placeholder="Search Student">
+
+                    <button
+                        class="btn btn-primary"
+                        data-bs-toggle="modal"
+                        data-bs-target="#addStudent">
+
+                        <i class="fa-solid fa-plus"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Statistics -->
+
+    <div class="row g-4 mb-4">
+
+        <div class="col-md-3">
+
+            <div class="stat-card text-center">
+
+                <i class="fa-solid fa-users stat-icon"></i>
+
+                <div class="stat-value">
+
+                    {{ students|length }}
+
+                </div>
+
+                <div class="stat-title">
+
+                    Total Students
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="stat-card text-center">
+
+                <i class="fa-solid fa-building stat-icon text-info"></i>
+
+                <div class="stat-value">
+
+                    {{ students|length }}
+
+                </div>
+
+                <div class="stat-title">
+
+                    Active Residents
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="stat-card text-center">
+
+                <i class="fa-solid fa-user-check stat-icon text-success"></i>
+
+                <div class="stat-value">
+
+                    {{ students|length }}
+
+                </div>
+
+                <div class="stat-title">
+
+                    Registered
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="stat-card text-center">
+
+                <i class="fa-solid fa-chart-line stat-icon text-warning"></i>
+
+                <div class="stat-value">
+
+                    100%
+
+                </div>
+
+                <div class="stat-title">
+
+                    System Usage
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Students Table -->
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <h5 class="mb-0">
+
+                Registered Students
+
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+
+            {% if students %}
+
+            <div class="table-responsive">
+
+                <table class="table align-middle" id="studentTable">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+
+                            <th>Name</th>
+
+                            <th>Username</th>
+
+                            <th>Email</th>
+
+                            <th>Room</th>
+
+                            <th>Actions</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                    {% for student in students %}
+
+                    <tr>
+
+                        <td>
+
+                            #{{ student.id }}
+
+                        </td>
+
+                        <td>
+
+                            <div class="d-flex align-items-center">
+
+                                <img
+                                src="https://ui-avatars.com/api/?name={{ student.name }}&background=2563eb&color=fff"
+                                class="rounded-circle me-3"
+                                width="45">
+
+                                <strong>
+
+                                    {{ student.name }}
+
+                                </strong>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+
+                            {{ student.username }}
+
+                        </td>
+
+                        <td>
+
+                            {{ student.email }}
+
+                        </td>
+
+                        <td>
+
+                            {{ student.room_number }}
+
+                        </td>
+
+                        <td>
+
+                            <div class="btn-group">
+
+                                <button
+                                class="btn btn-outline-primary btn-sm">
+
+                                    <i class="fa-solid fa-pen"></i>
+
+                                </button>
+
+                                <button
+                                class="btn btn-outline-danger btn-sm">
+
+                                    <i class="fa-solid fa-trash"></i>
+
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            {% else %}
+
+            <div class="text-center py-5">
+
+                <i class="fa-solid fa-user-group fa-5x mb-4 text-secondary"></i>
+
+                <h4>
+
+                    No Students Found
+
+                </h4>
+
+                <p class="text-secondary">
+
+                    Register students to begin using the system.
+
+                </p>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Add Student Modal -->
+
+<div
+class="modal fade"
+id="addStudent"
+tabindex="-1">
+
+<div class="modal-dialog modal-lg modal-dialog-centered">
+
+<div class="modal-content glass">
+
+<div class="modal-header border-0">
+
+<h4>
+
+Register Student
+
+</h4>
+
+<button
+class="btn-close btn-close-white"
+data-bs-dismiss="modal"></button>
+
+</div>
+
+<div class="modal-body">
+
+<form method="POST">
+
+<div class="row">
+
+<div class="col-md-6 mb-3">
+
+<label>Name</label>
+
+<input
+type="text"
+name="name"
+class="form-control"
+required>
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label>Email</label>
+
+<input
+type="email"
+name="email"
+class="form-control"
+required>
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label>Username</label>
+
+<input
+type="text"
+name="username"
+class="form-control"
+required>
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label>Room Number</label>
+
+<input
+type="text"
+name="room_number"
+class="form-control">
+
+</div>
+
+<div class="col-12 mb-4">
+
+<label>Password</label>
+
+<input
+type="password"
+name="password"
+class="form-control"
+required>
+
+</div>
+
+</div>
+
+<button
+type="submit"
+name="add_student"
+class="btn btn-success w-100">
+
+<i class="fa-solid fa-user-plus me-2"></i>
+
+Register Student
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const search=document.getElementById("studentSearch");
+
+if(search){
+
+search.addEventListener("keyup",function(){
+
+let value=this.value.toLowerCase();
+
+let rows=document.querySelectorAll("#studentTable tbody tr");
+
+rows.forEach(row=>{
+
+row.style.display=row.innerText.toLowerCase().includes(value)
+?"":"none";
+
+});
+
+});
+
+}
+
+</script>
+
+{% endblock %}

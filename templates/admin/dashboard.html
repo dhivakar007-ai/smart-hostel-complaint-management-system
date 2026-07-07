@@ -1,1 +1,488 @@
-<!-- HTML template for the Admin Dashboard page -->
+{% extends "layout.html" %}
+
+
+{% block title %}
+Admin Dashboard | Smart Hostel CMS
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<div class="container-fluid px-4">
+
+
+
+<!-- Header -->
+
+<div class="dashboard-header mb-5">
+
+
+<h1 class="fw-bold">
+
+<i class="fa-solid fa-chart-line me-2"></i>
+
+Admin Dashboard
+
+</h1>
+
+
+<p class="text-secondary">
+
+Monitor hostel complaints, students and resolution performance.
+
+</p>
+
+
+</div>
+
+
+
+
+
+<!-- Statistics Cards -->
+
+
+<div class="row g-4 mb-5">
+
+
+
+<div class="col-xl-3 col-md-6">
+
+
+<div class="stat-card">
+
+
+<div class="stat-icon blue">
+
+<i class="fa-solid fa-file-circle-exclamation"></i>
+
+</div>
+
+
+<div>
+
+
+<h2>
+
+{{ stats.total_complaints }}
+
+</h2>
+
+
+<p>
+Total Complaints
+</p>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="col-xl-3 col-md-6">
+
+
+<div class="stat-card">
+
+
+<div class="stat-icon orange">
+
+<i class="fa-solid fa-clock"></i>
+
+</div>
+
+
+<div>
+
+
+<h2>
+
+{{ stats.pending }}
+
+</h2>
+
+
+<p>
+Pending
+</p>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="col-xl-3 col-md-6">
+
+
+<div class="stat-card">
+
+
+<div class="stat-icon purple">
+
+<i class="fa-solid fa-spinner"></i>
+
+</div>
+
+
+<div>
+
+
+<h2>
+
+{{ stats.progress }}
+
+</h2>
+
+
+<p>
+In Progress
+</p>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="col-xl-3 col-md-6">
+
+
+<div class="stat-card">
+
+
+<div class="stat-icon green">
+
+<i class="fa-solid fa-circle-check"></i>
+
+</div>
+
+
+<div>
+
+
+<h2>
+
+{{ stats.resolved }}
+
+</h2>
+
+
+<p>
+Resolved
+</p>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<!-- Analytics Section -->
+
+
+<div class="row g-4">
+
+
+
+<div class="col-lg-8">
+
+
+<div class="dashboard-panel">
+
+
+<div class="panel-header">
+
+
+<h4>
+
+Recent Complaints
+
+</h4>
+
+
+<a href="{{ url_for('admin.complaints') }}">
+
+View All
+
+</a>
+
+
+</div>
+
+
+
+
+
+<div class="table-responsive">
+
+
+<table class="table table-dark table-hover align-middle">
+
+
+<thead>
+
+
+<tr>
+
+
+<th>
+Student
+</th>
+
+
+<th>
+Complaint
+</th>
+
+
+<th>
+Category
+</th>
+
+
+<th>
+Status
+</th>
+
+
+</tr>
+
+
+</thead>
+
+
+
+<tbody>
+
+
+{% for complaint in complaints %}
+
+
+<tr>
+
+
+<td>
+
+{{ complaint.student_name }}
+
+<br>
+
+<small class="text-secondary">
+
+Room {{ complaint.room_number }}
+
+</small>
+
+
+</td>
+
+
+
+<td>
+
+{{ complaint.title }}
+
+</td>
+
+
+
+<td>
+
+<span class="badge bg-primary">
+
+{{ complaint.category }}
+
+</span>
+
+</td>
+
+
+
+<td>
+
+
+{% if complaint.status == "Resolved" %}
+
+<span class="badge bg-success">
+
+Resolved
+
+</span>
+
+
+{% elif complaint.status == "In Progress" %}
+
+
+<span class="badge bg-warning">
+
+In Progress
+
+</span>
+
+
+{% else %}
+
+
+<span class="badge bg-danger">
+
+Pending
+
+</span>
+
+
+{% endif %}
+
+
+
+</td>
+
+
+
+</tr>
+
+
+{% else %}
+
+
+<tr>
+
+<td colspan="4" class="text-center">
+
+No complaints available
+
+</td>
+
+</tr>
+
+
+{% endfor %}
+
+
+
+</tbody>
+
+
+</table>
+
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<!-- Quick Actions -->
+
+
+<div class="col-lg-4">
+
+
+<div class="dashboard-panel">
+
+
+<h4 class="mb-4">
+
+Quick Actions
+
+</h4>
+
+
+
+<a href="{{ url_for('admin.complaints') }}"
+
+class="quick-btn">
+
+<i class="fa-solid fa-list"></i>
+
+Manage Complaints
+
+</a>
+
+
+
+
+<a href="{{ url_for('admin.manage_students') }}"
+
+class="quick-btn">
+
+<i class="fa-solid fa-users"></i>
+
+Manage Students
+
+</a>
+
+
+
+
+<a href="{{ url_for('admin.reports') }}"
+
+class="quick-btn">
+
+<i class="fa-solid fa-chart-pie"></i>
+
+View Reports
+
+</a>
+
+
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+{% endblock %}
