@@ -510,6 +510,16 @@ gap:30px;
 font-size:40px;
 
 }
+.hero-animation{
+    display:flex;
+    justify-content:center;
+    margin-bottom:30px;
+}
+
+.hero-animation img{
+    width:350px;
+    max-width:100%;
+}
 
 
 }
